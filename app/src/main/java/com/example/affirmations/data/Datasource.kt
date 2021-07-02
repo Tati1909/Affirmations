@@ -5,6 +5,7 @@ import com.example.affirmations.model.Affirmation
 
 //класс - источник данных
 class Datasource {
+    //загрузить аффирмации
     fun loadAffirmations(): List<Affirmation> {
         return listOf<Affirmation>(
             Affirmation(R.string.affirmation1),
