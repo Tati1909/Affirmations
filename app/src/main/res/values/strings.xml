@@ -1,3 +1,13 @@
 <resources>
     <string name="app_name">Affirmations</string>
+    <string name="affirmation1">Я сильный.</string>
+    <string name="affirmation2">Я верю в себя.</string>
+    <string name="affirmation3">Каждый день - это новая возможность расти и быть лучшей версией себя.</string>
+    <string name="affirmation4">Каждый вызов в моей жизни - это возможность чему-то научиться.</string>
+    <string name="affirmation5">Мне есть за что быть благодарным.</string>
+    <string name="affirmation6">В мою жизнь всегда входят хорошие вещи.</string>
+    <string name="affirmation7">Новые возможности ждут меня на каждом шагу.</string>
+    <string name="affirmation8">У меня есть смелость следовать своему сердцу.</string>
+    <string name="affirmation9">Все развернется в нужное время.</string>
+    <string name="affirmation10">Я буду присутствовать во всех моментах, которые принесет этот день.</string>
 </resources>
