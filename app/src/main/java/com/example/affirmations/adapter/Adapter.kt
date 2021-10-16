@@ -2,12 +2,9 @@ package com.example.affirmations.adapter
 
 import android.content.Context
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.example.affirmations.R
+import com.example.affirmations.databinding.ListItemBinding
 import com.example.affirmations.model.Affirmation
 
 //Adapter Нуждается в информации о том , как решить строковые ресурсы.
@@ -25,9 +22,8 @@ class Adapter(
     //ViewHolders хранят ссылки на каждый элемент списка (как в заметках мы искали заметки по Id,отсюда и название «держатель вида»).
     // Это упрощает обновление представления элемента списка новыми данными. ViewHolder также добавляет информацию,
     // которую использует RecyclerView для эффективного перемещения представлений по экрану.
-    class ViewHolder(private val view: View) : RecyclerView.ViewHolder(view) {
-        val textView: TextView = view.findViewById(R.id.item_text_view)
-        val imageView: ImageView = view.findViewById(R.id.item_image)
+    class ViewHolder(var binding: ListItemBinding) :
+        RecyclerView.ViewHolder(binding.root) {
     }
 
     /**
@@ -37,15 +33,12 @@ class Adapter(
     //(когда нет существующих ViewHolders, которые можно использовать повторно). Подробнее см 2.3.3.4
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         //получить экземпляр LayoutInflater из предоставленного контекста ( context из parent)
-        val adapterLayout = LayoutInflater.from(parent.context)
-            .inflate(
-                R.layout.list_item,
-                parent,
-                false
-            ) //расширить фактическое представление элемента списка
-        //false, потому что RecyclerView добавляет этот элемент в иерархию представления,
-        //когда придет время.
-        return ViewHolder(adapterLayout)
+        //расширить фактическое представление элемента списка
+        return ViewHolder(
+            ListItemBinding.inflate(
+                LayoutInflater.from(parent.context)
+            )
+        )
     }
 
     //получение количества элементов
@@ -60,8 +53,9 @@ class Adapter(
         //элемент RecyclerView = позиция списка наших данных
         val recyclerViewItem = dataSetList[position]
         //обновляем холдер для отображения картинки imageView и строки аффирмации textView
-        holder.imageView.setImageResource(recyclerViewItem.imageResourceId)
-        holder.textView.text = context.resources.getString(recyclerViewItem.stringResourceId)
+        holder.binding.itemImage.setImageResource(recyclerViewItem.imageResourceId)
+        holder.binding.itemTextView.text =
+            context.resources.getString(recyclerViewItem.stringResourceId)
 
     }
 }

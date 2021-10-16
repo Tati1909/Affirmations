@@ -2,27 +2,26 @@ package com.example.affirmations
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.recyclerview.widget.RecyclerView
-import com.example.affirmations.adapter.Adapter
-import com.example.affirmations.data.Datasource
-import com.example.affirmations.model.Affirmation
+import androidx.navigation.NavController
+import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.ui.setupActionBarWithNavController
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(R.layout.activity_main) {
+
+    //navController помечен как lateinit, поскольку он будет установлен в onCreate.
+    private lateinit var navController: NavController
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        setContentView(R.layout.activity_main)
+        //получим ссылку на nav_host_fragment(из activity_main.xml)
+        val navHostFragment = supportFragmentManager
+            .findFragmentById(R.id.nav_host_fragment) as NavHostFragment
 
-        //данные аффирмаций
-        val affirmationData: List<Affirmation> = Datasource().loadAffirmations()
-        //устанавливаем список
-        val recyclerView: RecyclerView = findViewById(R.id.recycler_view)
-        //указываем списку, что нужно использовать адаптер
-        //создаем новый объект Adapter(new не указываем)
-        recyclerView.adapter = Adapter(this@MainActivity, affirmationData)
+        //назначим наш navHostFragment собственностью navController
+        navController = navHostFragment.navController
 
-        //Этот параметр нужен только для повышения производительности
-        //!Только если размер вашего макета RecyclerView фиксирован в макете activity_main.xml
-        recyclerView.setHasFixedSize(true)
+        //Это гарантирует, что иконки action bar, такие как пункты меню будут видны.
+        setupActionBarWithNavController(navController)
     }
 }
